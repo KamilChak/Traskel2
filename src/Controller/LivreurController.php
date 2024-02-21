@@ -12,6 +12,7 @@ class LivreurController extends AbstractController
     #[Route('/livreur', name: 'accueil')]
     public function index(LivraisonRepository $liv): Response
     {
+
         $livraisons = $liv->findBy([], ['createdAt' => 'ASC'], 4);
 
         $totalLivraisons = $liv->count([]);

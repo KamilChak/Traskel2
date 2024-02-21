@@ -19,9 +19,6 @@ class Commande
     #[ORM\Column(length: 255)]
     private ?string $statut_Cmd = null;
 
-    #[ORM\Column]
-    private ?float $prix_Cmd = null;
-
     #[ORM\Column(length: 255)]
     private ?string $delais_Cmd = null;
 
@@ -60,14 +57,7 @@ class Commande
 
     public function getPrixCmd(): ?float
     {
-        return $this->prix_Cmd;
-    }
-
-    public function setPrixCmd(float $prix_Cmd): static
-    {
-        $this->prix_Cmd = $prix_Cmd;
-
-        return $this;
+        return $this->idPanier ? $this->idPanier->getTotalPrix() : null;
     }
 
     public function getDelaisCmd(): ?string
@@ -87,8 +77,4 @@ class Commande
         return $this->idPanier ? $this->idPanier->getNbrProds() : null;
     }
 
-    public function getPanierPrixTotal(): ?float
-    {
-        return $this->idPanier ? $this->idPanier->getTotalPrix() : null;
-    }
 }
