@@ -26,6 +26,7 @@ class Commande
     private ?string $delais_Cmd = null;
 
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
     private ?Panier $idPanier = null;
 
     public function getId(): ?int
@@ -81,15 +82,13 @@ class Commande
         return $this;
     }
 
-    public function getIdPanier(): ?Panier
+    public function getPanierNbProd(): ?int
     {
-        return $this->idPanier;
+        return $this->idPanier ? $this->idPanier->getNbrProds() : null;
     }
 
-    public function setIdPanier(?Panier $idPanier): static
+    public function getPanierPrixTotal(): ?float
     {
-        $this->idPanier = $idPanier;
-
-        return $this;
+        return $this->idPanier ? $this->idPanier->getTotalPrix() : null;
     }
 }

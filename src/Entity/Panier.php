@@ -24,8 +24,6 @@ class Panier
     #[ORM\OneToMany(targetEntity: Produit::class, mappedBy: 'panier')]
     private Collection $idprod;
 
-    #[ORM\ManyToOne(inversedBy: 'idPanier')]
-    private ?Livraison $livraison = null;
 
     public function __construct()
     {
@@ -91,15 +89,4 @@ class Panier
         return $this;
     }
 
-    public function getLivraison(): ?Livraison
-    {
-        return $this->livraison;
-    }
-
-    public function setLivraison(?Livraison $livraison): static
-    {
-        $this->livraison = $livraison;
-
-        return $this;
-    }
 }
