@@ -1,0 +1,31 @@
+{% extends 'baseLivreur.html.twig' %}
+
+{% block title %}Livraisons Cadeaux{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Livraisons des Cadeaux</h1>
+
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse</th>
+                    <th scope="col">Liste Cadeaux</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for liv in livCad %}
+                    <tr>
+                        <td>{{ liv.membre.nom_user }}</td>
+                        <td>{{ liv.membre.adresse_user }}</td>
+                        <td>{{ liv.listeCadeaux }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    
+
+{% endblock %}
