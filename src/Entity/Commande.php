@@ -76,5 +76,16 @@ class Commande
     {
         return $this->idPanier ? $this->idPanier->getNbrProds() : null;
     }
+    public function getPanier(): ?Panier
+    {
+        return $this->idPanier;
+    }
+
+    public function setPanier(?Panier $panier): self
+    {
+        $this->idPanier = $panier;
+
+        return $this;
+    }
 
 }

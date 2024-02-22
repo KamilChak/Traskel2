@@ -10,19 +10,19 @@
         <table class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th scope="col">Nom</th>
+                    <th scope="col">Adresse</th>
                     <th scope="col">Nb. Produits</th>
                     <th scope="col">Prix Total</th>
-                    <th scope="col">Statut</th>
+                    <th scope="col">Ajouté à</th>
                 </tr>
             </thead>
             <tbody>
                 {% for liv in livraisons %}
                     <tr>
-                        <td>{{ liv.commande.user.nom_user }}</td>
+                        <td>{{ liv.commande.adresseCmd }}</td>
                         <td>{{ liv.commande.panierNbProd }} produits</td>
-                        <td>{{ liv.commande.panierPrixTotal }}</td>
-                        <td>{{ liv.commande.statut }}</td>
+                        <td>{{ liv.commande.prixCmd }}</td>
+                        <td>{{ liv.createdAt|date('d-m-Y H:i:s') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
