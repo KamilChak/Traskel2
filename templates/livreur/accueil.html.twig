@@ -19,7 +19,7 @@
             <tbody>
                 {% for liv in livraisons %}
                     <tr>
-                        <td>{{ liv.commande.user.getNomUser() }}</td>
+                        <td>{{ liv.commande.user.nom_user }}</td>
                         <td>{{ liv.commande.panierNbProd }} produits</td>
                         <td>{{ liv.commande.panierPrixTotal }}</td>
                         <td>{{ liv.commande.statut }}</td>
