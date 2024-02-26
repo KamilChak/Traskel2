@@ -13,7 +13,7 @@ class Livraison
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Commande $commande = null;
 
@@ -23,6 +23,10 @@ class Livraison
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $isConfirmed = false;
+
 
     public function getId(): ?int
     {
@@ -64,6 +68,19 @@ class Livraison
 
         return $this;
     }
+
+    public function isIsConfirmed(): ?bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setIsConfirmed(bool $isConfirmed): static
+    {
+        $this->isConfirmed = $isConfirmed;
+
+        return $this;
+    }
+
 
     
 }

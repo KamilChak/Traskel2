@@ -12,8 +12,10 @@ class LivraisonsCadeauxController extends AbstractController
     #[Route('/livraisons/cadeaux', name: 'livraisons_cadeaux')]
     public function index(LivraisonsCadeauxRepository $livCad): Response
     {
+        $livCadeaux = $livCad->findBy([], ['createdAt' => 'ASC']);
+
         return $this->render('livraisons_cadeaux/listeLivCad.html.twig', [
-            'livCad'=>$livCad->findall(),
+            'livCad'=>$livCadeaux,
         ]);
     }
 }

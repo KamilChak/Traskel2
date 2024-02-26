@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -20,8 +21,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 180, unique: true)]
     private ?string $email = null;
 
+    protected const ROLES = ['admin', 'visiteur', 'livreur', 'membre'];
+
     #[ORM\Column]
-    private array $roles = [];
+    #[Assert\Choice(choices: User::ROLES)]
+    protected string $roles = 'visiteur';
 
     /**
      * @var string The hashed password
@@ -100,15 +104,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        return [$this->roles];
     }
 
-    public function setRoles(array $roles): static
+    public function setRoles(string $roles): static
     {
+        if (!in_array($roles, self::ROLES)) {
+            throw new \InvalidArgumentException("Invalid role: $roles");
+        }
+
         $this->roles = $roles;
 
         return $this;
