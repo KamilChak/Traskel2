@@ -16,14 +16,12 @@ class ChercherLivreurController extends AbstractController
     {
         $prenom = $request->query->get('prenom');
 
-        // Fetch the user by prenom
         $userRepository = $entityManager->getRepository(User::class);
         $user = $userRepository->findOneBy(['prenom_user' => $prenom]);
 
         $livraisons = [];
 
         if ($user instanceof User) {
-            // If user found, get all livraisons associated with this user
             $livraisons = $user->getLivraisons();
         }
 
