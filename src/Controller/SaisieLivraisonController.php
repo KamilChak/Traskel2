@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SaisieLivraisonController extends AbstractController
 {
-    #[Route('/listeLivraison', name: 'livraisons', methods: ['GET'])]
+    #[Route('/listeLivraison', name: 'livraisons')]
     public function index(LivraisonRepository $livraisonRepository): Response
     {
         $livraisons = $livraisonRepository->findAll();
@@ -24,7 +24,7 @@ class SaisieLivraisonController extends AbstractController
         ]);
     }
 
-    #[Route('/listeLivraison/{id}', name: 'affichLivraison', methods: ['GET'])]
+    #[Route('/listeLivraison/{id}', name: 'affichLivraison')]
     public function affichLivraison(Livraison $livraison): Response
     {
         return $this->render('saisie_livraison/affich.html.twig', [
@@ -52,7 +52,7 @@ class SaisieLivraisonController extends AbstractController
         ]);
     }
 
-    #[Route('/listeLivraison/{id}/modifier', name: 'modifierLivraison', methods: ['GET', 'POST'])]
+    #[Route('/listeLivraison/{id}/modifier', name: 'modifierLivraison')]
     public function modifierLivraison(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(LivraisonType::class, $livraison);
