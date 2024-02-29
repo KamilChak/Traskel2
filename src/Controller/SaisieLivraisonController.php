@@ -14,17 +14,17 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SaisieLivraisonController extends AbstractController
 {
-    #[Route('/listeLivraison', name: 'listeLivraisons')]
+    #[Route('/listeLivraisons', name: 'listeLivraisons')]
     public function index(LivraisonRepository $livraisonRepository): Response
     {
         $livraisons = $livraisonRepository->findAll();
 
-        return $this->render('saisie_livraison/index.html.twig', [
+        return $this->render('saisie_livraison/liste.html.twig', [
             'livraisons' => $livraisons,
         ]);
     }
 
-    #[Route('/listeLivraison/{id}', name: 'affichLivraison')]
+    #[Route('/listeLivraisons/{id}', name: 'affichLivraison')]
     public function affichLivraison(Livraison $livraison): Response
     {
         return $this->render('saisie_livraison/affich.html.twig', [
@@ -32,7 +32,7 @@ class SaisieLivraisonController extends AbstractController
         ]);
     }
 
-    #[Route('/ajouterLivraison', name: 'ajouterLivraison')]
+    #[Route('/ajouterLivraisons', name: 'ajouterLivraison')]
     public function ajouterLivraison(ManagerRegistry $mr, Request $request): Response
     {
         $em = $mr->getManager();
@@ -52,7 +52,7 @@ class SaisieLivraisonController extends AbstractController
         ]);
     }
 
-    #[Route('/listeLivraison/{id}/modifier', name: 'modifierLivraison')]
+    #[Route('/listeLivraisons/{id}/modifier', name: 'modifierLivraison')]
     public function modifierLivraison(Request $request, Livraison $livraison, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(LivraisonType::class, $livraison);
@@ -69,7 +69,7 @@ class SaisieLivraisonController extends AbstractController
         ]);
     }
 
-    #[Route('/listeLivraison/{id}/delete', name: 'deleteLivraison')]
+    #[Route('/listeLivraisons/{id}/delete', name: 'deleteLivraison')]
     public function deleteLivraison($id, LivraisonRepository $livR, ManagerRegistry $mr): Response
     {
         $em = $mr->getManager();

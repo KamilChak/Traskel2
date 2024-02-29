@@ -1,6 +1,6 @@
 {% extends 'baseLivreur.html.twig' %}
 
-{% block title %}Livraisons{% endblock %}
+{% block title %}Livraison{% endblock %}
 {% block stylesheets %}
     <style>
     th{
@@ -10,7 +10,7 @@
     </style>
 {% endblock %}
 {% block body %}
-    <h1>Livraisons</h1>
+    <h1>Livraison</h1>
 
     <div class="container">
         <table class="table">
@@ -32,7 +32,7 @@
                     <td>{{livraison.commande.prixCmd}}</td>
                 </tr>
                 <tr>
-                    <th>Crée à</th>
+                    <th>Ajouté à</th>
                     <td>{{ livraison.createdAt ? livraison.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 </tr>
                 <tr>
