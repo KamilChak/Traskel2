@@ -17,16 +17,16 @@ class UserFixtures extends Fixture
     }
 
     public function load(ObjectManager $manager): void
-    {
+    {/*
         UserFactory::new()->create([
             'email' => 'user1@example.com',
             'nom_user' => 'Smith',
             'password' => 'password123',
             'prenom_user' => 'John',
             'roles' => 'visiteur',
-        ]);
+        ]);*/
 
-        UserFactory::new()->createMany(5, function() {
+        UserFactory::new()->createMany(2, function() {
             return [
                 'email' => $this->faker->email(),
                 'nom_user' => $this->faker->lastName(),

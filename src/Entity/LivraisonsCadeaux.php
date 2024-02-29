@@ -6,6 +6,7 @@ use App\Repository\LivraisonsCadeauxRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LivraisonsCadeauxRepository::class)]
 class LivraisonsCadeaux
@@ -17,13 +18,16 @@ class LivraisonsCadeaux
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:'membre est obligatoire!')]
     private ?User $membre = null;
 
     #[ORM\ManyToMany(targetEntity: Cadeaux::class)]
+    #[Assert\NotBlank(message:'liste cadeaux est obligatoire!')]
     private Collection $listeCadeaux;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:'livreur est obligatoire!')]
     private ?User $livreur = null;
 
     #[ORM\Column]

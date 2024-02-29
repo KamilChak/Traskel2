@@ -19,8 +19,9 @@ class LivraisonType extends AbstractType
     {
         $builder
             ->add('createdAt', DateTimeType::class, [
-                'label' => 'Created At',
+                'label' => 'Ajouté à',
                 'widget' => 'single_text',
+                'required' => false,
             ])
             ->add('isConfirmed', CheckboxType::class, [
                 'label' => 'Confirmé',

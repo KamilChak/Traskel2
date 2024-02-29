@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LivraisonRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LivraisonRepository::class)]
 class Livraison
@@ -15,13 +16,16 @@ class Livraison
 
     #[ORM\OneToOne(cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:'commande est obligatoire!')]
     private ?Commande $commande = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank(message:'id Membre est obligatoire!')]
     private ?User $idMembre = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message:'temps d\'ajout est obligatoire!')]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column]
