@@ -15,7 +15,7 @@
     {% if user is not null %}
         <h1 class="mt-5 mb-5"><b>Résultats pour: "{{ user.prenomUser }} {{ user.nomUser }}"</b></h1>
     </div>
-
+    <hr style="border: 2px solid black;"></hr>
         {# livraisons Produits #}
         <div class="container">
             <h2 class="text-success">Liste des Livraisons Produits:</h2>
@@ -60,6 +60,7 @@
             </table>
         </div>
 
+<hr style="border: 2px solid black;"></hr>
 
         {# livraisons Cadeaux #}
         <div class="container mt-5 mb-5">
@@ -109,7 +110,7 @@
             </table>
         </div>
     {% else %}
-        <p>Aucun utilisateur trouvé avec ce prénom.</p>
+        <p><b>Aucun utilisateur trouvé avec ce prénom.</b></p>
     {% endif %}
 
     
