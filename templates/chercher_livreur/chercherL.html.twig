@@ -13,11 +13,12 @@
     </form>
 
     {% if user is not null %}
-        <h2 class="mt-5">Résultats pour: "{{ user.prenomUser }}"</h2>
+        <h1 class="mt-5 mb-5"><b>Résultats pour: "{{ user.prenomUser }} {{ user.nomUser }}"</b></h1>
     </div>
-    
 
-        <div class="container mt-3">
+        {# livraisons Produits #}
+        <div class="container">
+            <h2 class="text-success">Liste des Livraisons Produits:</h2>
             <div class="dropdown mb-3">
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Filtrer
@@ -58,6 +59,55 @@
                 </tbody>
             </table>
         </div>
+
+
+        {# livraisons Cadeaux #}
+        <div class="container mt-5 mb-5">
+            <h2 class="text-success">Liste des Livraisons Cadeaux:</h2>
+            <div class="dropdown mb-3">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Filtrer
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <a class="dropdown-item filterC-option" href="#" data-filter="all">Tous</a>
+                    <a class="dropdown-item filterC-option" href="#" data-filter="confirmed">Confirmé</a>
+                    <a class="dropdown-item filterC-option" href="#" data-filter="not-confirmed">Non Confirmé</a>
+                </div>
+            </div>
+            
+            <table class="table table-bordered mt-3">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Adresse</th>
+                        <th scope="col">Cadeaux</th>
+                        <th scope="col">Crée à</th>
+                        <th scope="col">Confirmé</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for livC in livCad %}
+                        <tr class="livraisonC-row {% if livC.isConfirmed %}confirmed{% else %}not-confirmed{% endif %}">
+                            <td>{{ livC.membre.prenomUser }} {{ livC.membre.nomUser }}</td>
+                            <td>{{ livC.membre.adresseUser }}</td>
+                            <td>
+                                {% for cadeau in livC.listeCadeaux %}
+                                    {{ cadeau.nomCad }}{% if not loop.last %}, {% endif %}
+                                {% endfor %}
+                            </td>
+                            <td>{{ livC.createdAt|date('d-m-Y H:i:s') }}</td>
+                            <td>
+                                {% if livC.isConfirmed %}
+                                    <span class="text-success">✔️</span>
+                                {% else %}
+                                    <span class="text-danger">❌</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
     {% else %}
         <p>Aucun utilisateur trouvé avec ce prénom.</p>
     {% endif %}
@@ -72,6 +122,20 @@
             e.preventDefault();
             const filter = this.dataset.filter;
             const rows = document.querySelectorAll('.livraison-row');
+            rows.forEach(row => {
+                row.style.display = 'table-row';
+                if (filter !== 'all' && !row.classList.contains(filter)) {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.querySelectorAll('.filterC-option').forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.preventDefault();
+            const filter = this.dataset.filter;
+            const rows = document.querySelectorAll('.livraisonC-row');
             rows.forEach(row => {
                 row.style.display = 'table-row';
                 if (filter !== 'all' && !row.classList.contains(filter)) {

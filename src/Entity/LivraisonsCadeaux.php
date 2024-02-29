@@ -26,6 +26,13 @@ class LivraisonsCadeaux
     #[ORM\JoinColumn(nullable: false)]
     private ?User $livreur = null;
 
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $isConfirmed = false;
+
+    
     public function __construct()
     {
         $this->listeCadeaux = new ArrayCollection();
@@ -80,6 +87,30 @@ class LivraisonsCadeaux
     public function setLivreur(?User $livreur): static
     {
         $this->livreur = $livreur;
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isIsConfirmed(): ?bool
+    {
+        return $this->isConfirmed;
+    }
+
+    public function setIsConfirmed(bool $isConfirmed): static
+    {
+        $this->isConfirmed = $isConfirmed;
 
         return $this;
     }

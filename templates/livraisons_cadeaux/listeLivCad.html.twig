@@ -1,11 +1,11 @@
 {% extends 'baseLivreur.html.twig' %}
 
-{% block title %}Accueil{% endblock %}
+{% block title %}Cadeaux{% endblock %}
 
 {% block body %}
 
     <div class="container mt-5">
-        <h1 class="mb-4">Livraisons Récents</h1>
+        <h1 class="mb-4">Livraisons Cadeaux</h1>
 
         <table class="table table-bordered">
             <thead class="thead-dark">
@@ -13,15 +13,28 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">Cadeaux</th>
+                    <th scope="col">Crée à</th>
+                    <th scope="col">Confirmé</th>
                 </tr>
             </thead>
             <tbody>
                 {% for livC in livCad %}
                     <tr>
-                        <td>{{ liv.commande.adresseCmd }}</td>
-                        <td>{{ liv.commande.panierNbProd }} produits</td>
-                        <td>{{ liv.commande.prixCmd }}</td>
-                        <td>{{ liv.createdAt|date('d-m-Y H:i:s') }}</td>
+                        <td>{{ livC.membre.prenomUser }} {{ livC.membre.nomUser }}</td>
+                        <td>{{ livC.membre.adresseUser }}</td>
+                        <td>
+                            {% for cadeau in livC.listeCadeaux %}
+                                {{ cadeau.nomCad }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ livC.createdAt|date('d-m-Y H:i:s') }}</td>
+                        <td>
+                            {% if livC.isConfirmed %}
+                                <span class="text-success">✔️</span>
+                            {% else %}
+                                <span class="text-danger">❌</span>
+                            {% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -32,5 +45,4 @@
         <div id="map"></div>
     </div>
     
-
 {% endblock %}

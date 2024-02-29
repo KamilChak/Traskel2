@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Repository\LivraisonsCadeauxRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,7 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class ChercherLivreurController extends AbstractController
 {
     #[Route('/chercher-livreur', name: 'chercher_livreur')]
-    public function chercherLivreur(Request $request, EntityManagerInterface $entityManager): Response
+    public function chercherLivreur(Request $request, EntityManagerInterface $entityManager, LivraisonsCadeauxRepository $livraisonsCadeauxR): Response
     {
         $prenom = $request->query->get('prenom');
 
@@ -20,14 +21,17 @@ class ChercherLivreurController extends AbstractController
         $user = $userRepository->findOneBy(['prenom_user' => $prenom]);
 
         $livraisons = [];
+        $livraisonsCadeaux = [];
 
         if ($user instanceof User) {
             $livraisons = $user->getLivraisons();
+            $livraisonsCadeaux = $livraisonsCadeauxR->findByLivreur($user);
         }
 
         return $this->render('chercher_livreur/chercherL.html.twig', [
             'user' => $user,
             'livraisons' => $livraisons,
+            'livCad' => $livraisonsCadeaux,
         ]);
     }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class LivraisonsCadeauxController extends AbstractController
 {
-    #[Route('/livraisons/cadeaux', name: 'livraisons_cadeaux')]
+    #[Route('/livreur/cadeaux', name: 'livraisons_cadeaux')]
     public function index(LivraisonsCadeauxRepository $livCad): Response
     {
         $livCadeaux = $livCad->findBy([], ['createdAt' => 'ASC']);
