@@ -24,15 +24,18 @@ class LivraisonType extends AbstractType
             ])
             ->add('isConfirmed', CheckboxType::class, [
                 'label' => 'Confirmé',
-                'required' => false, 
+                'required' => false,
             ])
             ->add('commande', EntityType::class, [
                 'class' => Commande::class,
                 'choice_label' => 'id',
+                'required' => false,
             ])
             ->add('idMembre', EntityType::class, [
+                'label' => 'Livreur',
                 'class' => User::class,
-                'choice_label' => 'id',
+                'choice_label' => 'prenom_user',
+                'required' => false,
             ])
             ->add('Sauvegarder',SubmitType::class, [
                 'attr' => ['class' => 'btn btn-primary']

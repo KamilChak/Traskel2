@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SaisieLivraisonController extends AbstractController
 {
-    #[Route('/listeLivraison', name: 'livraisons')]
+    #[Route('/listeLivraison', name: 'listeLivraisons')]
     public function index(LivraisonRepository $livraisonRepository): Response
     {
         $livraisons = $livraisonRepository->findAll();
@@ -44,7 +44,7 @@ class SaisieLivraisonController extends AbstractController
             $em->persist($livraison);
             $em->flush();
 
-            return $this->redirectToRoute('livraisons');
+            return $this->redirectToRoute('listeLivraisons');
         }
 
         return $this->render('saisie_livraison/ajouter.html.twig', [
@@ -61,7 +61,7 @@ class SaisieLivraisonController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('livraisons');
+            return $this->redirectToRoute('listeLivraisons');
         }
 
         return $this->render('saisie_livraison/modifier.html.twig', [
@@ -77,7 +77,7 @@ class SaisieLivraisonController extends AbstractController
         $em->remove($dataid);
         $em->flush();
         
-        return $this->redirectToRoute('livraisons');
+        return $this->redirectToRoute('listeLivraisons');
     }
 
 }

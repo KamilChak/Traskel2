@@ -13,8 +13,8 @@
                     <th scope="col">Nom</th>
                     <th scope="col">Adresse</th>
                     <th scope="col">Cadeaux</th>
-                    <th scope="col">Crée à</th>
-                    <th scope="col">Confirmé</th>
+                    <th scope="col">Ajouté à</th>
+                    <th scope="col">Confirmation</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,11 +29,9 @@
                         </td>
                         <td>{{ livC.createdAt|date('d-m-Y H:i:s') }}</td>
                         <td>
-                            {% if livC.isConfirmed %}
-                                <span class="text-success">✔️</span>
-                            {% else %}
-                                <span class="text-danger">❌</span>
-                            {% endif %}
+                            <form action="{{ path('confirmerLivraisonCadeaux',{'id': livC.id})}}" method="post">
+                                <button type="submit" class="btn btn-success">Confirmer</button>
+                            </form>
                         </td>
                     </tr>
                 {% endfor %}
